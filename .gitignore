@@ -1,2 +1,6 @@
 .idea
 test*.py
+input
+output
+/test
+node_modules

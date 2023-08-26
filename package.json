@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "@tensorflow/tfjs-node": "^4.10.0",
-    "fft-js": "^0.0.12",
-    "mic": "^2.1.2"
-  }
-}

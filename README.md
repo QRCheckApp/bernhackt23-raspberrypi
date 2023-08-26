@@ -1,4 +1,4 @@
-# BärnHäck 2023 – Smoke Voice
+# BärnHäckt 2023 – Smoke Voice
 
 GitHub repository für die Smoke Voice Challenge (Raspberry Pi).
 

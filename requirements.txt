@@ -1,0 +1,9 @@
+pyaudio~=0.2.13
+numpy~=1.24.3
+tensorflow~=2.13.0
+librosa~=0.10.1
+sounddevice~=0.4.6
+pydub~=0.25.1
+matplotlib~=3.7.2
+opencv-python~=4.8.0.76
+websockets~=11.0.3

@@ -68,7 +68,7 @@ def main():
                         if should_trigger_alarm(last_fifteen_seconds):
                             last_fifteen_seconds.clear()
                             print("!!!!!!!!!ALARM TRIGGERED!!!!!!!!!")
-                            #requests.get('https://bernhackt23-backend.web01.dalcloud.net/api/rasp/alarm/z76tuhgb6z7tuhg76zu8th')
+                            requests.get('https://bernhackt23-backend.web01.dalcloud.net/api/rasp/alarm/z76tuhgb6z7tuhg76zu8th')
 
                 except KeyboardInterrupt:
                     print("\nExiting.")

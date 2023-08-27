@@ -14,7 +14,7 @@ def initialize_pyaudio():
     return p, numdevices
 
 
-def capture_audio(p, rate, frames_per_buffer, duration=3):
+def capture_audio(p, rate, frames_per_buffer, duration=4):
     try:
         stream = p.open(format=pyaudio.paInt16, channels=1, rate=rate, input=True, frames_per_buffer=frames_per_buffer)
         frames = [stream.read(frames_per_buffer) for _ in range(int(rate / frames_per_buffer * duration))]
@@ -29,7 +29,7 @@ def capture_audio(p, rate, frames_per_buffer, duration=3):
 
 
 def should_trigger_alarm(last_fifteen_seconds):
-    return sum(last_fifteen_seconds) >= 3
+    return sum(last_fifteen_seconds) >= 2
 
 
 def main():
@@ -52,7 +52,7 @@ def main():
     RATE = 44100
     FRAMES_PER_BUFFER = 1024
 
-    last_fifteen_seconds = deque(maxlen=5)  # Each entry represents 3 seconds, so 5 entries make up 15 seconds
+    last_fifteen_seconds = deque(maxlen=3)  # Each entry represents 3 seconds, so 5 entries make up 15 seconds
 
     for i in range(numdevices):
         device_info = p.get_device_info_by_host_api_device_index(0, i)
@@ -68,7 +68,7 @@ def main():
                         if should_trigger_alarm(last_fifteen_seconds):
                             last_fifteen_seconds.clear()
                             print("!!!!!!!!!ALARM TRIGGERED!!!!!!!!!")
-                            requests.get('https://bernhackt23-backend.web01.dalcloud.net/api/rasp/alarm/z76tuhgb6z7tuhg76zu8th')
+                            #requests.get('https://bernhackt23-backend.web01.dalcloud.net/api/rasp/alarm/z76tuhgb6z7tuhg76zu8th')
 
                 except KeyboardInterrupt:
                     print("\nExiting.")
@@ -91,9 +91,11 @@ def detect_intervals(audio, model, target_class_index=0):
 
     # Predict
     prediction = model.predict(samples)
+    print(prediction)
+    print(np.max(prediction))
 
     # Check if the target class is detected
-    if np.argmax(prediction) == target_class_index:
+    if np.argmax(prediction) == target_class_index and np.max(prediction) >= 10000:
         print("Target class detected.")
         return True
     else:

@@ -8,7 +8,7 @@ import tensorflow as tf
 
 
 # Funktion zum Laden der Daten mit einem frame-basierten Ansatz
-def load_data(data_directory, sample_rate=44100, frame_length=3, hop_length=0.25):
+def load_data(data_directory, sample_rate=44100, frame_length=4, hop_length=0.25):
     X = []
     y = []
     frame_length_samples = int(frame_length * sample_rate)
@@ -74,7 +74,7 @@ label_to_index = {label: index for index, label in enumerate(unique_labels)}
 y_numeric = np.array([label_to_index[label] for label in y])
 
 # Modell trainieren
-model.fit(X, y_numeric, epochs=30)
+model.fit(X, y_numeric, epochs=40)
 
 model.save("../output")
 

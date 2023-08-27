@@ -13,15 +13,15 @@ async def send_frames():
             async with websockets.connect(uri) as websocket:
                 cap = init_camera(0)
                 if cap is None:
-                    print("Failed to initialize camera. Retrying in 5 seconds...")
-                    await asyncio.sleep(5)
+                    print("Failed to initialize camera. Retrying in 2 seconds...")
+                    await asyncio.sleep(2)
                     continue
 
                 while True:
                     ret, frame = cap.read()
                     if not ret:
                         print("Failed to get frame")
-                        break
+                        continue
 
                     _, buffer = cv2.imencode('.jpg', frame)
                     base64_frame = base64.b64encode(buffer).decode('utf-8')
@@ -31,8 +31,8 @@ async def send_frames():
             cap.release()
 
         except Exception as e:
-            print(f"WebSocket Error: {e}. Reconnecting in 5 seconds...")
-            await asyncio.sleep(5)
+            print(f"WebSocket Error: {e}. Reconnecting in 2 seconds...")
+            await asyncio.sleep(2)
 
 
 def init_camera(index):
